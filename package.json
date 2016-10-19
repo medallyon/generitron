@@ -1,0 +1,19 @@
+{
+  "name": "exambot",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["Discord", "bot", "Discord.js"],
+  "author": "https://github.com/Medallyon/",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Medallyon/exambot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Medallyon/exambot/issues"
+  },
+  "homepage": "https://github.com/Medallyon/exambot/"
+}
