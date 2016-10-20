@@ -1,19 +1,30 @@
 {
   "name": "exambot",
   "version": "0.0.1",
+  "description": "A bot developed in NodeJS for Discord.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["Discord", "bot", "Discord.js"],
-  "author": "https://github.com/Medallyon/",
-  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Medallyon/exambot.git"
+    "url": "git+https://github.com/Medallyon/exambot.git"
   },
+  "keywords": [
+    "Discord",
+    "exam",
+    "bot"
+  ],
+  "dependencies": {
+    "Discord.js": "^9.3.0",
+    "fs-extra": "^0.30.0",
+    "colors": "^1.1.2",
+    "wikijs": "^1.1.0",
+  },
+  "author": "https://github.com/Medallyon",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Medallyon/exambot/issues"
+    "url": "https://github.com/Medallyon/ocr-discord-exambot/issues"
   },
-  "homepage": "https://github.com/Medallyon/exambot/"
+  "homepage": "https://github.com/Medallyon/ocr-discord-exambot#readme"
 }
