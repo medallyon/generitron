@@ -21,7 +21,15 @@ colors.setTheme({
 
 client.on("ready", function()
 {
-    console.log(colors.log("Logged in and ready to go!\nCurrently serving " + client.guilds.size + " guilds and " + client.users.size + " users."));          
+    console.log(colors.log("Logged in and ready to go!\nCurrently serving " + client.guilds.size + " guilds and " + client.users.size + " users."));
+})
+
+client.on("message", function(msg)
+{
+    let output = (msg.guild ? `${new Date()}\n@${msg.author.username}: "${msg.content}"\n${msg.guild.name} #${msg.channel.name}` : `${new Date()}\n@${msg.author}: "${msg.content}"\nDM: #${msg.channel.recipient}`);
+    console.log(colors.log("\n" + output));
+
+    if (msg.author.id === client.user.id) return;
 })
 
 client.login(config.token);
