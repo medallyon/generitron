@@ -21,7 +21,7 @@ I use [SemVer](http://semver.org/) for versioning. For the versions available, s
 
 ## Authors
 
-* **Tilman Raendchen** - *Initial work* - [Tilman [Medallyon] Raendchen](https://github.com/Medallyon)
+* [**Tilman Raendchen**](https://github.com/Medallyon) - *Initial work*
 
 ## License
 
