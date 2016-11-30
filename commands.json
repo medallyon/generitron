@@ -1,3 +1,4 @@
 ﻿{
-  "ping": ["ping"]
+  "ping": [ "ping" ],
+  "fetchWiki":  ["wiki", "wikipedia"]
 }

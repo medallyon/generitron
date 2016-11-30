@@ -7,7 +7,7 @@ var Discord = require("discord.js")
 var config = require(path.join(__dirname, "config.json"))
     , commands = require(path.join(__dirname, "commands.json"));
 
-// dynamically import modules
+// dynamically import custom modules
 var modules = {};
 let moduleFiles = fs.readdirSync(path.join(__dirname, "modules"));
 moduleFiles.forEach(function(file) {
@@ -15,7 +15,7 @@ moduleFiles.forEach(function(file) {
         modules[file.replace(/\.js/g, "")] = require(path.join(__dirname, "modules", file));
 });
 
-// dynamically import utils
+// dynamically import custom utils
 var utils = {};
 let utilFiles = fs.readdirSync(path.join(__dirname, "utils"));
 utilFiles.forEach(function(file) {
@@ -41,7 +41,7 @@ client.on("message", function (msg) {
     let guild = msg.guild
         , today = new Date()
         , consoleOutput = `\n${utils.getFullMonth(today.getUTCMonth()).slice(0, 3)} ${utils.getFullDay(today.getUTCDate())} ${today.getUTCFullYear()}\n${(msg.author.id === client.user.id ? "[YOU] " : "")}@${msg.author.username}: "${msg.content}"\n${msg.guild ? (msg.guild.name + " - [" + msg.channel.name + "]") : ("[Private Message]")}`
-        , command;
+        , command, args;
 
     // log the formatted message
     console.log(consoleOutput);
@@ -50,10 +50,15 @@ client.on("message", function (msg) {
     if (msg.author.bot) return;
 
     // check whether user is using prefix or mention
-    if (msg.content.split(" ")[0] === `<@${(guild && guild.member(client.user).nickname) ? "!" : ""}${client.user.id}>`)
+    if (msg.content.split(" ")[0] === `<@${(guild && guild.member(client.user).nickname) ? "!" : ""}${client.user.id}>`) {
         command = msg.content.split(" ")[1];
-    else
+        args = msg.content.split(" ").slice(2);
+    }
+    else {
         command = msg.content.split(" ")[0].slice(config.prefix.length);
+        args = msg.content.split(" ").slice(1);
+    }
+    msg["arguments"] = args;
 
     // handle a single @mention
     if (msg.mentions.users.has(client.user.id) && msg.content.split(" ").length === 1) {
