@@ -1,4 +1,6 @@
 ﻿{
   "ping": [ "ping" ],
-  "fetchWiki":  ["wiki", "wikipedia"]
+  "me":  [ "me" ],
+  "fetchWiki": [ "wiki", "wikipedia" ],
+  "fetchYT":  [ "youtube", "yt", "stream", "play" ]
 }

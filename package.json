@@ -8,11 +8,12 @@
   },
   "repository": "http://github.com/medallyon/exambot",
   "dependencies": {
-    "discord.js": "^10.0.1",
+    "discord.js": "github:hydrabolt/discord.js#indev",
     "fs-extra": "^1.0.0",
     "node-wikipedia": "0.0.2",
     "opusscript": "0.0.1",
-    "uws": "^0.11.1"
+    "uws": "^0.11.1",
+    "ytdl-core": "^0.7.20"
   },
   "license": "MIT"
 }
