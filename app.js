@@ -38,6 +38,10 @@ client.once("ready", function () {
 // "message" event, taking 1 parameter: message
 client.on("message", function (msg) {
     // set essential variables
+    // today = {Object} Date
+    // consoleOutput = {String} "[Formatted Timestamp] + [Author] + [Message Content] + [Message Location]"
+    // command = {String} "[Command]"
+    // args = {Array} [Command Arguments]
     let guild = msg.guild
         , today = new Date()
         , consoleOutput = `\n${utils.getFullMonth(today.getUTCMonth()).slice(0, 3)} ${utils.getFullDay(today.getUTCDate())} ${today.getUTCFullYear()}\n${(msg.author.id === client.user.id ? "[YOU] " : "")}@${msg.author.username}: "${msg.content}"\n${msg.guild ? (msg.guild.name + " - [" + msg.channel.name + "]") : ("[Private Message]")}`
@@ -49,7 +53,7 @@ client.on("message", function (msg) {
     // return on bot message - we don't want to interfere with other bots
     if (msg.author.bot) return;
 
-    // check whether user is using prefix or mention
+    // check whether user is using command prefix or mention to execute a command
     if (msg.content.split(" ")[0] === `<@${(guild && guild.member(client.user).nickname) ? "!" : ""}${client.user.id}>`) {
         command = msg.content.split(" ")[1];
         args = msg.content.split(" ").slice(2);
@@ -58,6 +62,7 @@ client.on("message", function (msg) {
         command = msg.content.split(" ")[0].slice(config.prefix.length);
         args = msg.content.split(" ").slice(1);
     }
+    // create a new variable {arguments} inside the {msg} object
     msg["arguments"] = args;
 
     // handle a single @mention
@@ -76,7 +81,7 @@ client.on("message", function (msg) {
             if (command === alias) {
 
                 // execute the command
-                modules[cmd](msg);
+                return modules[cmd](msg);
             }
         });
     }
