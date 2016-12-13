@@ -11,7 +11,7 @@ var config = require(path.join(__dirname, "config.json"))
     , commands = require(path.join(__dirname, "commands.json"));
 
 // dynamically import custom command modules
-var modules = {};
+global.modules = {};
 let moduleFiles = fs.readdirSync(path.join(__dirname, "modules"));
 moduleFiles.forEach(function(file) {
     if (/.*\.js/g.test(file))
@@ -19,7 +19,7 @@ moduleFiles.forEach(function(file) {
 });
 
 // dynamically import custom utilities
-var utils = {};
+global.utils = {};
 let utilFiles = fs.readdirSync(path.join(__dirname, "utils"));
 utilFiles.forEach(function(file) {
     if (/.*\.js/g.test(file)) {
@@ -27,8 +27,8 @@ utilFiles.forEach(function(file) {
     }
 });
 
-// ======================= [! Event Listeners !] ======================= //
-// ===================================================================== //
+// ======================= [! Imports !] ======================= //
+// ============================================================= //
 
 // instantiate a new global Discord Client
 global.client = new Discord.Client({ forceFetchUsers: true });
@@ -38,6 +38,7 @@ global.client = new Discord.Client({ forceFetchUsers: true });
 
 // "ready" event, taking no parameter
 client.once("ready", function () {
+    // log a formatted string to the console to signify that the script is ready
     console.log(`${client.user.username.toUpperCase()} is ready to serve ${client.guilds.size} guild${client.guilds.size == 1 ? "" : "s"}, accumulating ${client.users.size} user${client.users.size == 1 ? "" : "s"}.`);
 });
 
@@ -100,6 +101,7 @@ client.on("message", function (msg) {
 // ================================================================ //
 // ======================= [ Client Login ] ======================= //
 
+// login to Discord using the token found inside the config
 client.login(config.discord.loginToken)
     .catch(err => {
         console.error(err.stack);
