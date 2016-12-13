@@ -1,4 +1,7 @@
-﻿// imports
+﻿// =========================================================== //
+// ======================= [ Imports ] ======================= //
+
+// external imports
 var Discord = require("discord.js")
     , fs = require("fs-extra")
     , path = require("path");
@@ -7,7 +10,7 @@ var Discord = require("discord.js")
 var config = require(path.join(__dirname, "config.json"))
     , commands = require(path.join(__dirname, "commands.json"));
 
-// dynamically import custom modules
+// dynamically import custom command modules
 var modules = {};
 let moduleFiles = fs.readdirSync(path.join(__dirname, "modules"));
 moduleFiles.forEach(function(file) {
@@ -15,7 +18,7 @@ moduleFiles.forEach(function(file) {
         modules[file.replace(/\.js/g, "")] = require(path.join(__dirname, "modules", file));
 });
 
-// dynamically import custom utils
+// dynamically import custom utilities
 var utils = {};
 let utilFiles = fs.readdirSync(path.join(__dirname, "utils"));
 utilFiles.forEach(function(file) {
@@ -24,11 +27,14 @@ utilFiles.forEach(function(file) {
     }
 });
 
-// instantiate a new Discord Client
+// ======================= [! Event Listeners !] ======================= //
+// ===================================================================== //
+
+// instantiate a new global Discord Client
 global.client = new Discord.Client({ forceFetchUsers: true });
 
-// ===================================================================
-// ======================= [ Event Listeners ] =======================
+// =================================================================== //
+// ======================= [ Event Listeners ] ======================= //
 
 // "ready" event, taking no parameter
 client.once("ready", function () {
@@ -37,11 +43,12 @@ client.once("ready", function () {
 
 // "message" event, taking 1 parameter: message
 client.on("message", function (msg) {
-    // set essential variables
-    // today = {Object} Date
-    // consoleOutput = {String} "[Formatted Timestamp] + [Author] + [Message Content] + [Message Location]"
-    // command = {String} "[Command]"
-    // args = {Array} [Command Arguments]
+    /**
+     * today = {Object} Date
+     * consoleOutput = {String} "[Formatted Timestamp] + [Author] + [Message Content] + [Message Location]"
+     * command = {String} "[Command]"
+     * args = {Array} [Command Arguments]
+    **/
     let guild = msg.guild
         , today = new Date()
         , consoleOutput = `\n${utils.getFullMonth(today.getUTCMonth()).slice(0, 3)} ${utils.getFullDay(today.getUTCDate())} ${today.getUTCFullYear()}\n${(msg.author.id === client.user.id ? "[YOU] " : "")}@${msg.author.username}: "${msg.content}"\n${msg.guild ? (msg.guild.name + " - [" + msg.channel.name + "]") : ("[Private Message]")}`
@@ -87,10 +94,12 @@ client.on("message", function (msg) {
     }
 });
 
-// ======================= [! Event Listeners !] =======================
-// =====================================================================
+// ======================= [! Event Listeners !] ======================= //
+// ===================================================================== //
 
-// client login
+// ================================================================ //
+// ======================= [ Client Login ] ======================= //
+
 client.login(config.discord.loginToken)
     .catch(err => {
         console.error(err.stack);
