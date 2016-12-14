@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "A bot developed in NodeJS for Discord",
   "main": "app.js",
-  "dependencies": {},
+  "dependencies": {
+    "discord.js": "github:hydrabolt/discord.js#indev",
+    "fs-extra": "^1.0.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
