@@ -1,4 +1,5 @@
 ﻿{
+  "evaluate": [ "evaluate", "eval" ],
   "ping": [ "ping" ],
   "me":  [ "me" ],
   "fetchWiki": [ "wiki", "wikipedia" ],
