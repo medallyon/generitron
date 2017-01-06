@@ -31,9 +31,9 @@ var getModsSync = function(dir, extensions) {
 }
 
 // dynamically import custom command modules
-global.modules = utils.getModsSync(join(__dirname, "modules"), ["js"]);
+global.modules = getModsSync(join(__dirname, "modules"), ["js"]);
 // dynamically import custom utilities
-global.utils = utils.getModsSync(join(__dirname, "utils"), ["js"]);
+global.utils = getModsSync(join(__dirname, "utils"), ["js"]);
 
 // console.log(modules);
 
