@@ -12,8 +12,8 @@ var Discord = require("discord.js")
 global.client = new Discord.Client();
 
 // imports from local directories
-var config = require(join(__dirname, "config.json"))
-    , commands = require(join(__dirname, "commands.json"));
+client["config"] = require(join(__dirname, "config.json"))
+, client["commands"] = require(join(__dirname, "commands.json"));
 
 global.__base = __dirname;
 
@@ -24,8 +24,6 @@ var getModsSync = function(dir) {
     for (let file of moduleFiles) {
         imports[file.replace(/\.(js)/g, "")] = require(join(dir, file));
     }
-
-    console.log(Object.keys(imports));
 
     return imports;
 }
@@ -56,7 +54,7 @@ app.use(require(join(__dirname, "routers", "index.js")));
 
 global.handlers = new Discord.Collection();
 // login to Discord using the token found inside the config
-client.login(config.discord.loginToken)
+client.login(client.config.discord.loginToken)
     .then(() => {
         console.log("logged in!");
         app.listen(8080);

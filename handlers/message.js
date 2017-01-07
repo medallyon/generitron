@@ -23,7 +23,7 @@ client.on("message", function (msg) {
         args = msg.content.split(" ").slice(2);
     }
     else {
-        command = msg.content.split(" ")[0].slice(config.prefix.length);
+        command = msg.content.split(" ")[0].slice(client.config.prefix.length);
         args = msg.content.split(" ").slice(1);
     }
     // create a new variable {arguments} inside the {msg} object
@@ -36,10 +36,10 @@ client.on("message", function (msg) {
 
     // establish a command handler for
     // every command in the commands.json
-    for (let cmd in commands) {
+    for (let cmd in client.commands) {
 
         // for every alias of the current command
-        commands[cmd].forEach(alias => {
+        client.commands[cmd].forEach(alias => {
 
             // check if some alias matches the filtered command string
             if (command === alias) {
