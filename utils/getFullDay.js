@@ -1,4 +1,5 @@
-﻿var getFullDay = (day) => {
+﻿function getFullDay(day)
+{
     day = String(day);
     if (!(day > 10 && day < 21)) {
         if (day.charAt(day.length - 1) == "1")
@@ -14,6 +15,8 @@
 
         else
             return day + "th";
+    } else {
+        return day + "th";
     }
 }
 

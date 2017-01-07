@@ -1,4 +1,5 @@
-﻿function ping(msg) {
+﻿function ping(msg)
+{
     msg.channel.sendMessage("Pong!");
 }
 

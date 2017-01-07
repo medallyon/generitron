@@ -1,4 +1,4 @@
-var evaluate = function(msg)
+function evaluate(msg)
 {
     try {
         let evaluated = eval(msg.content.split(" ").slice(1).join(" "));

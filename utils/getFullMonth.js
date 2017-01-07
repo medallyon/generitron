@@ -1,4 +1,5 @@
-﻿var getFullMonth = (month) => {
+﻿function getFullMonth(month)
+{
     if (month == 0)
         return "January";
 

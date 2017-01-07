@@ -8,32 +8,32 @@ var Discord = require("discord.js")
     , express = require("express")
     , bodyparser = require("body-parser");
 
+// instantiate a new global Discord Client
+global.client = new Discord.Client();
+
 // imports from local directories
 var config = require(join(__dirname, "config.json"))
     , commands = require(join(__dirname, "commands.json"));
 
 global.__base = __dirname;
 
-var getModsSync = function(dir, extensions) {
+var getModsSync = function(dir) {
     let imports = {}
     , moduleFiles = fs.readdirSync(dir);
 
-    let allowedRegExp = new RegExp(`.*\.(${extensions.join("|")})`, "g")
-    , replaceRegExp = new RegExp(`\.(${extensions.join("|")})`, "g");
-
     for (let file of moduleFiles) {
-        if (allowedRegExp.test(file)) {
-            imports[file.replace(replaceRegExp, "")] = require(join(dir, file));
-        }
+        imports[file.replace(/\.(js)/g, "")] = require(join(dir, file));
     }
+
+    console.log(Object.keys(imports));
 
     return imports;
 }
 
 // dynamically import custom command modules
-global.modules = getModsSync(join(__dirname, "modules"), ["js"]);
+global.modules = getModsSync(join(__dirname, "modules"));
 // dynamically import custom utilities
-global.utils = getModsSync(join(__dirname, "utils"), ["js"]);
+global.utils = getModsSync(join(__dirname, "utils"));
 
 // console.log(modules);
 
@@ -53,9 +53,6 @@ app.use(require(join(__dirname, "routers", "index.js")));
 
 // ================================================================ //
 // ======================= [ Discord Login ] ======================= //
-
-// instantiate a new global Discord Client
-global.client = new Discord.Client({ forceFetchUsers: true });
 
 global.handlers = new Discord.Collection();
 // login to Discord using the token found inside the config

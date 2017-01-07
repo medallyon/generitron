@@ -1,4 +1,5 @@
-﻿var me = (msg) => {
+﻿function me(msg)
+{
     let author = msg.author;
     let reformattedAuthor = {};
     

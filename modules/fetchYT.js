@@ -1,7 +1,8 @@
 ﻿const yt = require("ytdl-core");
 const urlRegExp = new RegExp("(?:https?:\/\/)?(?:(?:(?:www\.?)?youtube\.com(?:\/(?:(?:watch\?.*?(v=[^&\s]+).*)|(?:v(\/.*))|(channel\/.+)|(?:user\/(.+))|(?:results\?(search_query=.+))))?)|(?:youtu\.be(\/.*)?))", "g");
 
-var fetchYT = (msg) => {
+function fetchYT(msg)
+{
     const voiceChannel = msg.member.voiceChannel;
     if (!voiceChannel) {
         return msg.reply("Please be in a voice channel first!");
