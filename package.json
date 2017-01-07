@@ -1,6 +1,6 @@
 {
   "name": "exambot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A bot developed in NodeJS for Discord",
   "main": "app.js",
   "dependencies": {
