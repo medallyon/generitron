@@ -26,8 +26,8 @@ client.on("message", function (msg) {
         command = msg.content.split(" ")[0].slice(client.config.prefix.length);
         args = msg.content.split(" ").slice(1);
     }
-    // create a new variable {arguments} inside the {msg} object
-    msg["arguments"] = args;
+    // create a new variables ({command}, {args}) inside the {msg} object
+    msg["command"] = command, msg["args"] = args;
 
     // handle a single @mention
     if (msg.mentions.users.has(client.user.id) && msg.content.split(" ").length === 1) {
@@ -39,7 +39,7 @@ client.on("message", function (msg) {
     for (let cmd in client.commands) {
 
         // for every alias of the current command
-        client.commands[cmd].forEach(alias => {
+        for (let alias of client.commands[cmd].alias) {
 
             // check if some alias matches the filtered command string
             if (command === alias) {
@@ -47,6 +47,6 @@ client.on("message", function (msg) {
                 // execute the command
                 return modules[cmd](msg);
             }
-        });
+        }
     }
 });
