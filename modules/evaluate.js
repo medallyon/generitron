@@ -1,7 +1,7 @@
 function evaluate(msg)
 {
     try {
-        let evaluated = eval(msg.content.split(" ").slice(1).join(" "));
+        let evaluated = eval(msg.args.join(" "));
         msg.channel.sendMessage("```js\n" + evaluated + "```");
     } catch (err) {
         msg.channel.sendMessage("```js\n" + err + "```").then((errorMessage) => {

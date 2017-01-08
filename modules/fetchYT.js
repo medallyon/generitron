@@ -7,12 +7,12 @@ function fetchYT(msg)
     if (!voiceChannel) {
         return msg.reply("Please be in a voice channel first!");
     }
-    if (!urlRegExp.test(msg.arguments[0])) {
+    if (!urlRegExp.test(msg.args[0])) {
         return msg.channel.sendMessage("A valid YouTube URL needs to be supplied with this command.");
     }
     voiceChannel.join()
         .then(connnection => {
-            let stream = yt(msg.arguments[0], { audioonly: true });
+            let stream = yt(msg.args[0], { audioonly: true });
             const dispatcher = connnection.playStream(stream);
             dispatcher.on("end", () => {
                 voiceChannel.leave();

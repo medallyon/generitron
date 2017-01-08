@@ -2,10 +2,10 @@
 
 function fetchWiki(msg)
 {
-    if (msg.arguments.length === 0)
+    if (msg.args.length === 0)
         return msg.channel.sendMessage(`At least one parameter must be passed with that command. Try this:\`\`\`fix\n@${client.user.username} wiki Batman\`\`\``);
 
-    let query = msg.arguments.join(" ");
+    let query = msg.args.join(" ");
 
     wiki.page.data(query.replace(/ /g, "_"), { content: true }, (res) => {
 
