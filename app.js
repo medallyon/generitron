@@ -61,7 +61,8 @@ global.handlers = new Discord.Collection();
 client.login(client.config.discord.loginToken)
     .then(() => {
     	// once logged in, start the interactive web-panel
-        app.listen(8080);
+        app.listen(8080)
+            .on("error", console.error);
 
         // read the directory for the handlers
         fs.readdir(join(__dirname, "handlers"), (err, files) => {
