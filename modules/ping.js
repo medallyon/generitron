@@ -1,6 +1,6 @@
 ﻿function ping(msg)
 {
-    let text = "Pong!";
+    let text = `Pong! (~${Date.now() - msg.performance}ms)`;
     if (msg.args.length > 0) {
         text = msg.args.join(" ");
     }

@@ -1,5 +1,8 @@
 // "message" event, taking 1 parameter: message
 client.on("message", function (msg) {
+    // this variable holds the time it was received
+    msg["performance"] = Date.now();
+
     /**
      * today = {Object} Date
      * consoleOutput = {String} "[Formatted Timestamp] + [Author] + [Message Content] + [Message Location]"
