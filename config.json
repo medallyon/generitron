@@ -1,12 +1,12 @@
 ﻿{
   "discord": {
-    "loginToken": "",
+    "loginToken": "MjM4Njg5Nzc3NTQ3NzM5MTM2.C3PHzw.gckPBGjH5oQ_NnozYsrL05_kim8",
     "ownerId": "129036763367735297"
   },
   "google": {
     "api": {
       "keys": {
-        "youtube": ""
+        "youtube": "AIzaSyDthGvm_f4kRj135hTzL5qzxDbXJpKk-Dw"
       }
     }
   },
