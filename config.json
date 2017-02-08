@@ -1,6 +1,14 @@
 ﻿{
   "discord": {
-    "loginToken": ""
+    "loginToken": "",
+    "ownerId": "129036763367735297"
+  },
+  "google": {
+    "api": {
+      "keys": {
+        "youtube": ""
+      }
+    }
   },
   "prefix": "!"
 }

@@ -39,7 +39,6 @@ function help(msg)
 
         h.addField("Aliases", command.alias.join(", "));
         for (let arg in command.arguments) {
-            console.log(arg);
             h.addField(arg + ((command.arguments[arg].optional) ? "" : "*"), command.arguments[arg].description);
         }
         h.addField("Example Usage", `\`\`\`fix\n${client.config.prefix}${command.alias[0]} ${command.example}\`\`\``);

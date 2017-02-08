@@ -11,7 +11,19 @@
         "optional": false
       }
     },
+    "userPermissions": 900,
     "example": "\"Hello There, World!\""
+  },
+
+  "about": {
+    "description": "Shows the `about` panel.",
+    "alias": [
+      "about",
+      "info"
+    ],
+    "arguments": {},
+    "userPermissions": 100,
+    "example": ""
   },
 
   "help": {
@@ -27,6 +39,7 @@
         "optional": true
       }
     },
+    "userPermissions": 100,
     "example": "[whois]"
   },
 
@@ -41,6 +54,7 @@
         "optional": true
       }
     },
+    "userPermissions": 100,
     "example": "[According to all known laws of aviation, there is no way that a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyways. Because bees don't care what humans think is impossible.]"
   },
 
@@ -57,6 +71,7 @@
         "optional": true
       }
     },
+    "userPermissions": 100,
     "example": "[@Medallyon#5012]"
   },
 
@@ -72,16 +87,21 @@
         "optional": false
       }
     },
+    "userPermissions": 100,
     "example": "[Batman]"
   },
 
-  "fetchYT": {
+  "stream": {
     "description": "Fetches and plays a video from `YouTube` in audio-format in a Voice Channel.",
     "alias": [
+      "play",
+      "stream",
       "youtube",
       "yt",
-      "stream",
-      "play"
+      "queue",
+      "stop",
+      "skip",
+      "now"
     ],
     "arguments": {
       "url": {
@@ -89,6 +109,7 @@
         "optional": false
       }
     },
+    "userPermissions": 100,
     "example": "https://www.youtube.com/watch?v=bl5TUw7sUBs"
   }
 }

@@ -5,13 +5,13 @@ client.on("message", function (msg) {
 
     /**
      * today = {Object} Date
-     * consoleOutput = {String} "[Formatted Timestamp] + [Author] + [Message Content] + [Message Location]"
+     * consoleOutput = {String} "[Formatted Timestamp] + [Author]: [Message Content] + [Message Location]"
      * command = {String} "[Command]"
      * args = {Array} [Command Arguments]
     **/
     let guild = msg.guild
         , today = new Date()
-        , consoleOutput = `\n${utils.getFullMonth(today.getUTCMonth()).slice(0, 3)} ${utils.getFullDay(today.getUTCDate())} ${today.getUTCFullYear()}\n${(msg.author.id === client.user.id ? "[YOU] " : "")}@${msg.author.username}: "${msg.content}"\n${msg.guild ? (msg.guild.name + " - [" + msg.channel.name + "]") : ("[Private Message]")}`
+        , consoleOutput = `\n${utils.getFullMonth(today.getUTCMonth()).slice(0, 3)} ${utils.getFullDay(today.getUTCDate())} ${today.getUTCFullYear()}\n${(msg.author.id === client.user.id ? "[YOU] " : "")}@${msg.author.username}: "${(msg.content.length > 0) ? msg.content : ((msg.attachments.size > 0) ? "[Attachment]" : "[Embed]")}"\n${msg.guild ? (msg.guild.name + " - [" + msg.channel.name + "]") : ("[Private Message]")}`
         , command, args;
 
     // log the formatted message
@@ -29,7 +29,7 @@ client.on("message", function (msg) {
         command = msg.content.split(" ")[0].slice(client.config.prefix.length);
         args = msg.content.split(" ").slice(1);
     }
-    // create a new variables ({command}, {args}) inside the {msg} object
+    // create new variables ({command}, {args}) inside the {msg} object
     msg["command"] = command, msg["args"] = args;
 
     // handle a single @mention
@@ -39,16 +39,26 @@ client.on("message", function (msg) {
 
     // establish a command handler for
     // every command in the commands.json
-    for (let cmd in client.commands) {
 
-        // for every alias of the current command
-        for (let alias of client.commands[cmd].alias) {
+    // check if the command prefix exists
+    if (msg.content.split(" ")[0].slice(0, msg.content.split(" ")[0].indexOf(command)) === client.config.prefix) {
 
-            // check if some alias matches the filtered command string
-            if (command === alias) {
+        // iterate through all commands
+        for (let cmd in client.commands) {
 
-                // execute the command
-                return modules[cmd](msg);
+            // for every alias of the current command
+            for (let alias of client.commands[cmd].alias) {
+
+                // check if some alias matches the filtered command string
+                if (command === alias) {
+
+                    // check if the member actually has permission to execute the command
+                    if (utils.hasPermission(client.commands[cmd], msg.member)) {
+
+                        // execute the command
+                        return modules[cmd](msg);
+                    }
+                }
             }
         }
     }

@@ -13,25 +13,14 @@ global.client = new Discord.Client();
 
 // imports from local directories, globally available through client
 client["config"] = require(join(__dirname, "config.json"))
-, client["commands"] = require(join(__dirname, "commands.json"));
+, client["commands"] = require(join(__dirname, "commands.json"))
+, client["savedVars"] = require(join(__dirname, "savedVariables.json"));
 
 // declare a variable indicating the CWD, simply for convenience
 global.__base = __dirname;
 
 // function to synchronously import .js modules
-var getModsSync = function(dir) {
-	// initiate imports and read the module dir
-    let imports = {}
-    , moduleFiles = fs.readdirSync(dir);
-
-    // for every file in the module dir, add it to imports
-    for (let file of moduleFiles) {
-        imports[file.replace(/\.(js)/g, "")] = require(join(dir, file));
-    }
-
-    // return the whole imports object
-    return imports;
-}
+const getModsSync = require("./utils/getModsSync.js");
 
 // dynamically import custom command modules
 global.modules = getModsSync(join(__dirname, "modules"));
@@ -52,27 +41,23 @@ app.use(bodyparser.urlencoded({ extended: true }));
 // use routers for processing user activity on the webpanel
 app.use(require(join(__dirname, "routers", "index.js")));
 
-// ================================================================ //
+// ================================================================= //
 // ======================= [ Discord Login ] ======================= //
 
-// initiate a global handlers Collection
-global.handlers = new Discord.Collection();
+process.on('unhandledRejection', (reason, p) => {
+    console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+    // application specific logging, throwing an error, or other logic here
+});
+
+// require all the handlers
+require(join(__dirname, "handlers"));
+
 // login to Discord using the token found inside the config
 client.login(client.config.discord.loginToken)
     .then(() => {
-    	// once logged in, start the interactive web-panel
+        // once logged in, start the interactive web-panel
         app.listen(8080)
             .on("error", console.error);
-
-        // read the directory for the handlers
-        fs.readdir(join(__dirname, "handlers"), (err, files) => {
-            if (err) console.error(err);
-
-            // import each of the handlers into the cache
-            for (let handler of files) {
-                if (/.*\.(js)/g.test(handler)) handlers.set(handler.replace(/\.(js)/g, ""), require(join(__dirname, "handlers", handler)));
-            }
-        });
     })
     // catch an error IF there is one
     .catch(console.error);
