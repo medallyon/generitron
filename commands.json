@@ -100,20 +100,5 @@
     },
     "userPermissions": 100,
     "example": "https://www.youtube.com/watch?v=bl5TUw7sUBs"
-  },
-
-  "hanoi": {
-    "description": "Initiates a game of `Towers of Hanoi`.",
-    "alias": [
-      "hanoi"
-    ],
-    "arguments": {
-      "action": {
-        "description": "new",
-        "optional": false
-      }
-    },
-    "userPermissions": 100,
-    "example": "new"
   }
 }
