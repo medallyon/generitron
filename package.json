@@ -9,6 +9,7 @@
     "express": "^4.14.0",
     "feedparser": "^2.0.0",
     "fs-extra": "^1.0.0",
+    "node-wikipedia": "0.0.2",
     "opusscript": "0.0.1",
     "simple-youtube-api": "^2.1.0",
     "ytdl-core": "^0.8.1"
