@@ -1,6 +1,6 @@
 {
   "name": "generitron",
-  "version": "1.0.4a",
+  "version": "1.0.5a",
   "description": "A bot developed in NodeJS for Discord",
   "main": "app.js",
   "dependencies": {
