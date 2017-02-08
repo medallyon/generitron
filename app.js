@@ -20,19 +20,7 @@ client["config"] = require(join(__dirname, "config.json"))
 global.__base = __dirname;
 
 // function to synchronously import .js modules
-var getModsSync = function(dir) {
-	// initiate imports and read the module dir
-    let imports = {}
-    , moduleFiles = fs.readdirSync(dir);
-
-    // for every file in the module dir, add it to imports
-    for (let file of moduleFiles) {
-        imports[file.replace(/\.(js)/g, "")] = require(join(dir, file));
-    }
-
-    // return the whole imports object
-    return imports;
-}
+const getModsSync = require("./utils/getModsSync.js");
 
 // dynamically import custom command modules
 global.modules = getModsSync(join(__dirname, "modules"));
@@ -67,7 +55,7 @@ require(join(__dirname, "handlers"));
 // login to Discord using the token found inside the config
 client.login(client.config.discord.loginToken)
     .then(() => {
-    	// once logged in, start the interactive web-panel
+        // once logged in, start the interactive web-panel
         app.listen(8080)
             .on("error", console.error);
     })
