@@ -13,7 +13,8 @@ global.client = new Discord.Client();
 
 // imports from local directories, globally available through client
 client["config"] = require(join(__dirname, "config.json"))
-, client["commands"] = require(join(__dirname, "commands.json"));
+, client["commands"] = require(join(__dirname, "commands.json"))
+, client["savedVars"] = require(join(__dirname, "savedVariables.json"));
 
 // declare a variable indicating the CWD, simply for convenience
 global.__base = __dirname;
@@ -52,8 +53,13 @@ app.use(bodyparser.urlencoded({ extended: true }));
 // use routers for processing user activity on the webpanel
 app.use(require(join(__dirname, "routers", "index.js")));
 
-// ================================================================ //
+// ================================================================= //
 // ======================= [ Discord Login ] ======================= //
+
+process.on('unhandledRejection', (reason, p) => {
+    console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+    // application specific logging, throwing an error, or other logic here
+});
 
 // initiate a global handlers Collection
 global.handlers = new Discord.Collection();
@@ -64,15 +70,8 @@ client.login(client.config.discord.loginToken)
         app.listen(8080)
             .on("error", console.error);
 
-        // read the directory for the handlers
-        fs.readdir(join(__dirname, "handlers"), (err, files) => {
-            if (err) console.error(err);
-
-            // import each of the handlers into the cache
-            for (let handler of files) {
-                if (/.*\.(js)/g.test(handler)) handlers.set(handler.replace(/\.(js)/g, ""), require(join(__dirname, "handlers", handler)));
-            }
-        });
+        // require all the handlers
+        require(join(__dirname, "handlers"));
     })
     // catch an error IF there is one
     .catch(console.error);

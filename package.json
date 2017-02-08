@@ -1,6 +1,6 @@
 {
   "name": "exambot",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A bot developed in NodeJS for Discord",
   "main": "app.js",
   "dependencies": {
@@ -9,7 +9,8 @@
     "express": "^4.14.0",
     "feedparser": "^2.0.0",
     "fs-extra": "^1.0.0",
-    "opusscript": "0.0.1"
+    "opusscript": "0.0.1",
+    "simple-youtube-api": "^2.1.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
