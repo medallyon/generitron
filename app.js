@@ -61,17 +61,15 @@ process.on('unhandledRejection', (reason, p) => {
     // application specific logging, throwing an error, or other logic here
 });
 
-// initiate a global handlers Collection
-global.handlers = new Discord.Collection();
+// require all the handlers
+require(join(__dirname, "handlers"));
+
 // login to Discord using the token found inside the config
 client.login(client.config.discord.loginToken)
     .then(() => {
     	// once logged in, start the interactive web-panel
         app.listen(8080)
             .on("error", console.error);
-
-        // require all the handlers
-        require(join(__dirname, "handlers"));
     })
     // catch an error IF there is one
     .catch(console.error);
