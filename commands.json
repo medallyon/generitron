@@ -15,6 +15,17 @@
     "example": "\"Hello There, World!\""
   },
 
+  "about": {
+    "description": "Shows the `about` panel.",
+    "alias": [
+      "about",
+      "info"
+    ],
+    "arguments": {},
+    "userPermissions": 100,
+    "example": ""
+  },
+
   "help": {
     "description": "Displays some help with commands.",
     "alias": [
