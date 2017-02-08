@@ -5,13 +5,13 @@ client.on("message", function (msg) {
 
     /**
      * today = {Object} Date
-     * consoleOutput = {String} "[Formatted Timestamp] + [Author] + [Message Content] + [Message Location]"
+     * consoleOutput = {String} "[Formatted Timestamp] + [Author]: [Message Content] + [Message Location]"
      * command = {String} "[Command]"
      * args = {Array} [Command Arguments]
     **/
     let guild = msg.guild
         , today = new Date()
-        , consoleOutput = `\n${utils.getFullMonth(today.getUTCMonth()).slice(0, 3)} ${utils.getFullDay(today.getUTCDate())} ${today.getUTCFullYear()}\n${(msg.author.id === client.user.id ? "[YOU] " : "")}@${msg.author.username}: "${(msg.content.length > 0) ? msg.content : "[Embed]"}"\n${msg.guild ? (msg.guild.name + " - [" + msg.channel.name + "]") : ("[Private Message]")}`
+        , consoleOutput = `\n${utils.getFullMonth(today.getUTCMonth()).slice(0, 3)} ${utils.getFullDay(today.getUTCDate())} ${today.getUTCFullYear()}\n${(msg.author.id === client.user.id ? "[YOU] " : "")}@${msg.author.username}: "${(msg.content.length > 0) ? msg.content : ((msg.attachments.size > 0) ? "[Attachment]" : "[Embed]")}"\n${msg.guild ? (msg.guild.name + " - [" + msg.channel.name + "]") : ("[Private Message]")}`
         , command, args;
 
     // log the formatted message
@@ -39,7 +39,7 @@ client.on("message", function (msg) {
 
     // establish a command handler for
     // every command in the commands.json
-    // 
+
     // check if the command prefix exists
     if (msg.content.split(" ")[0].slice(0, msg.content.split(" ")[0].indexOf(command)) === client.config.prefix) {
 
