@@ -6,7 +6,16 @@ var Discord = require("discord.js")
     , fs = require("fs-extra")
     , join = require("path").join
     , express = require("express")
-    , bodyparser = require("body-parser");
+    , bodyparser = require("body-parser")
+    , watch = require("watch");
+
+const MODULES_PATH = join(__dirname, "modules")
+, UTILS_PATH = join(__dirname, "utils")
+, ROUTERS_PATH = join(__dirname, "routers")
+, HANDLERS_PATH = join(__dirname, "handlers");
+
+// import the custom recache function
+global.recache = require("recache");
 
 // instantiate a new global Discord Client
 global.client = new Discord.Client();
@@ -26,6 +35,49 @@ const getModsSync = require("./utils/getModsSync.js");
 global.modules = getModsSync(join(__dirname, "modules"));
 // dynamically import custom utilities
 global.utils = getModsSync(join(__dirname, "utils"));
+
+// ========================================================= //
+// ======================= [ Watch ] ======================= //
+
+// start watching modules
+watch.watchTree(MODULES_PATH, {
+    ignoreDotFiles: true,
+    filter: (x) => x.endsWith(".js"),
+    interval: 30
+}, function(file, curr, prev) {
+    console.log("\nattempting to recache " + file);
+    recache(file);
+});
+
+// start watching modules
+watch.watchTree(UTILS_PATH, {
+    ignoreDotFiles: true,
+    filter: (x) => x.endsWith(".js"),
+    interval: 30
+}, function(file, curr, prev) {
+    console.log("\nattempting to recache " + file);
+    recache(file);
+});
+
+// start watching modules
+watch.watchTree(ROUTERS_PATH, {
+    ignoreDotFiles: true,
+    filter: (x) => x.endsWith(".js"),
+    interval: 30
+}, function(file, curr, prev) {
+    console.log("\nattempting to recache " + file);
+    recache(file);
+});
+
+// start watching modules
+watch.watchTree(HANDLERS_PATH, {
+    ignoreDotFiles: true,
+    filter: (x) => x.endsWith(".js"),
+    interval: 30
+}, function(file, curr, prev) {
+    console.log("\nattempting to recache " + file);
+    recache(file);
+});
 
 // =========================================================== //
 // ======================= [ Express ] ======================= //
