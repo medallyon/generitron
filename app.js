@@ -15,9 +15,6 @@ const MODULES_PATH = join(__dirname, "modules")
 , ROUTERS_PATH = join(__dirname, "routers")
 , HANDLERS_PATH = join(__dirname, "handlers");
 
-// import the custom recache function
-global.recache = require("recache");
-
 // instantiate a new global Discord Client
 global.client = new Discord.Client();
 
