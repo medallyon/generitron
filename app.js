@@ -7,7 +7,8 @@ var Discord = require("discord.js")
     , join = require("path").join
     , express = require("express")
     , bodyparser = require("body-parser")
-    , watch = require("watch");
+    , watch = require("watch")
+    , decache = require("decache");
 
 const MODULES_PATH = join(__dirname, "modules")
 , UTILS_PATH = join(__dirname, "utils")
@@ -45,38 +46,22 @@ watch.watchTree(MODULES_PATH, {
     filter: (x) => x.endsWith(".js"),
     interval: 30
 }, function(file, curr, prev) {
-    console.log("\nattempting to recache " + file);
-    recache(file);
+    if (typeof file == "object" && prev === null && curr === null) return;
+    console.log("\nattempting to recache " + file.replace(/.*\\/g, ""));
+    decache(file);
+    modules[file.replace(/.*\\/g, "").replace(".js", "")] = require(file);
 });
 
-// start watching modules
+// start watching utils
 watch.watchTree(UTILS_PATH, {
     ignoreDotFiles: true,
     filter: (x) => x.endsWith(".js"),
     interval: 30
 }, function(file, curr, prev) {
-    console.log("\nattempting to recache " + file);
-    recache(file);
-});
-
-// start watching modules
-watch.watchTree(ROUTERS_PATH, {
-    ignoreDotFiles: true,
-    filter: (x) => x.endsWith(".js"),
-    interval: 30
-}, function(file, curr, prev) {
-    console.log("\nattempting to recache " + file);
-    recache(file);
-});
-
-// start watching modules
-watch.watchTree(HANDLERS_PATH, {
-    ignoreDotFiles: true,
-    filter: (x) => x.endsWith(".js"),
-    interval: 30
-}, function(file, curr, prev) {
-    console.log("\nattempting to recache " + file);
-    recache(file);
+    if (typeof file == "object" && prev === null && curr === null) return;
+    console.log("\nattempting to recache " + file.replace(/.*\\/g, ""));
+    decache(file);
+    utils[file.replace(/.*\\/g, "").replace(".js", "")] = require(file);
 });
 
 // =========================================================== //
@@ -96,6 +81,7 @@ app.use(require(join(__dirname, "routers", "index.js")));
 // ================================================================= //
 // ======================= [ Discord Login ] ======================= //
 
+// cheap error catching
 process.on('unhandledRejection', (reason, p) => {
     console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
     // application specific logging, throwing an error, or other logic here

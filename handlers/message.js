@@ -55,8 +55,13 @@ client.on("message", function (msg) {
                     // check if the member actually has permission to execute the command
                     if (utils.hasPermission(client.commands[cmd], msg.member)) {
 
-                        // execute the command
-                        return modules[cmd](msg);
+                        try {
+                            // execute the command module
+                            return modules[cmd](msg);
+                        } catch (err) {
+                            // catch an error in case the command module is faulty
+                            console.error(err);
+                        }
                     }
                 }
             }
