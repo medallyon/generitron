@@ -61,6 +61,7 @@ client.on("message", function (msg) {
                         } catch (err) {
                             // catch an error in case the command module is faulty
                             console.error(err);
+                            msg.channel.sendMessage(`\`\`\`js\n${err}\`\`\``);
                         }
                     }
                 }
