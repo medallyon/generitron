@@ -21,19 +21,15 @@ function process(guildId)
 
 function createCurrentTrackEmbed(track)
 {
-    let embed = new Discord.RichEmbed();
-
-    embed.setColor(utils.randColor())
-    .setAuthor(track.title, track.requested.member.user.avatarURL, `https://youtu.be/${track.video_id}`)
-    .setThumbnail(track.iurlmaxres)
-    .setFooter("Brought to you by Grogsile Industries Inc.", client.user.avatarURL)
-    .setTimestamp(new Date(track.timestamp))
-    .addField("Channel", `[${track.author}](https://youtube.com/user/${track.author.replace(/ /g, "")})`, true)
-    .addField("Views", utils.numberWithCommas(track.view_count), true)
-    .addField("Length", `${Math.floor(track.length_seconds / 60)} Minutes ${track.length_seconds % 60} Seconds`, true)
-    .addField("Reference", `https://youtu.be/${track.video_id}`, true);
-
-    return embed;
+    return new Discord.RichEmbed()
+        .setColor(utils.randColor())
+        .setAuthor(track.title, track.requested.member.user.avatarURL, `https://youtu.be/${track.video_id}`)
+        .setThumbnail(track.iurlmaxres)
+        .setFooter("Brought to you by Grogsile Industries Inc.", client.user.avatarURL)
+        .setTimestamp(new Date(track.timestamp))
+        .addField("Views", utils.numberWithCommas(track.view_count), true)
+        .addField("Length", `${Math.floor(track.length_seconds / 60)} Minutes ${track.length_seconds % 60} Seconds`, true)
+        .addField("Reference", `https://youtu.be/${track.video_id}`, true);
 }
 
 function createQueueEmbed(guildId)
