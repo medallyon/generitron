@@ -41,7 +41,7 @@ global.utils = getModsSync(join(__dirname, "utils"));
 watch.watchTree(MODULES_PATH, {
     ignoreDotFiles: true,
     filter: (x) => x.endsWith(".js"),
-    interval: 30
+    interval: 10
 }, function(file, curr, prev) {
     if (typeof file == "object" && prev === null && curr === null) return;
     console.log("\nattempting to recache " + file.replace(/.*\\/g, ""));
@@ -53,7 +53,7 @@ watch.watchTree(MODULES_PATH, {
 watch.watchTree(UTILS_PATH, {
     ignoreDotFiles: true,
     filter: (x) => x.endsWith(".js"),
-    interval: 30
+    interval: 10
 }, function(file, curr, prev) {
     if (typeof file == "object" && prev === null && curr === null) return;
     console.log("\nattempting to recache " + file.replace(/.*\\/g, ""));
