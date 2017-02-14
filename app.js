@@ -91,7 +91,7 @@ require(join(__dirname, "handlers"));
 client.login(client.config.discord.loginToken)
     .then(() => {
         // once logged in, start the interactive web-panel
-        app.listen(8080)
+        app.listen(8787)
             .on("error", console.error);
     })
     // catch an error IF there is one
