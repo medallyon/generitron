@@ -7,7 +7,7 @@ var router = express.Router();
 router.get("/", function(req, res)
 {
     // send the main HTML file to the user's browser
-    res.sendFile(path.join(__base, "www", "main", "index.html"));
+    res.sendFile(path.join(__base, "wwwroot", "html", "index", "index.html"));
 });
 
 router.post("/", function(req, res)

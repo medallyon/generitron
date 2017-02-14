@@ -72,6 +72,8 @@ app.use(bodyparser.json());
 // allow to POST to the server with extended functionality
 app.use(bodyparser.urlencoded({ extended: true }));
 
+// make all resources available
+app.use(require(join(__dirname, "routers", "resources.js")));
 // use routers for processing user activity on the webpanel
 app.use(require(join(__dirname, "routers", "index.js")));
 

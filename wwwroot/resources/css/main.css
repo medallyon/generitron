@@ -1,0 +1,16 @@
+* {
+    padding: 0.5em;
+    color: #000;
+    margin-bottom: 0.5em;
+}
+
+body {
+    background: #444;
+}
+
+form {
+    display: block;
+    width: 75%;
+    vertical-align: baseline;
+    margin: auto;
+}
