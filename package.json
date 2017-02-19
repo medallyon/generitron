@@ -1,17 +1,19 @@
 {
   "name": "generitron",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A bot developed in NodeJS for Discord",
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "decache": "^4.1.0",
     "discord.js": "github:hydrabolt/discord.js#master",
     "express": "^4.14.0",
     "feedparser": "^2.0.0",
     "fs-extra": "^1.0.0",
-    "node-wikipedia": "0.0.2",
-    "opusscript": "0.0.1",
+    "node-wikipedia": "^0.0.2",
+    "opusscript": "^0.0.2",
     "simple-youtube-api": "^2.1.0",
+    "watch": "^1.0.1",
     "ytdl-core": "^0.8.1"
   },
   "scripts": {
@@ -19,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Medallyon/exambot.git"
+    "url": "git+https://github.com/Medallyon/generitron.git"
   },
   "keywords": [
     "discord",
@@ -29,7 +31,7 @@
   "author": "https://github.com/Medallyon",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Medallyon/exambot/issues"
+    "url": "https://github.com/Medallyon/generitron/issues"
   },
-  "homepage": "https://github.com/Medallyon/exambot#readme"
+  "homepage": "https://github.com/Medallyon/generitron#readme"
 }
