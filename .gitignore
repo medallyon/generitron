@@ -41,3 +41,4 @@ jspm_packages
 .vs
 bin
 /ecosystem.config.js
+sftp-config.json
