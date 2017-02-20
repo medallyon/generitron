@@ -1,3 +1,3 @@
 $(window).on("load", () => {
-    $("a").smoothScroll();
+    $("a").smoothScroll({ speed: "auto" });
 });
