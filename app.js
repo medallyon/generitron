@@ -5,11 +5,12 @@
 var Discord = require("discord.js")
     , fs = require("fs-extra")
     , join = require("path").join
-    , express = require("express")
+    , Express = require("express")
     , bodyparser = require("body-parser")
     , watch = require("watch")
     , decache = require("decache");
 
+// define paths for module directories
 const MODULES_PATH = join(__dirname, "modules")
 , UTILS_PATH = join(__dirname, "utils")
 , ROUTERS_PATH = join(__dirname, "routers")
@@ -65,7 +66,7 @@ watch.watchTree(UTILS_PATH, {
 // ======================= [ Express ] ======================= //
 
 // create a new Express App which allows the handling of URIs
-let app = new express();
+let app = new Express();
 
 // allow the use of url-based arguments
 app.use(bodyparser.json());
