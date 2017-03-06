@@ -21,7 +21,9 @@ global.client = new Discord.Client();
 // imports from local directories, globally available through client
 client["config"] = require(join(__dirname, "config.json"))
 , client["commands"] = require(join(__dirname, "commands.json"))
-, client["savedVars"] = require(join(__dirname, "savedVariables.json"));
+, client["savedVars"] = require(join(__dirname, "savedVariables.json"))
+
+, client["parties"] = new Discord.Collection();
 
 // declare a variable indicating the CWD, simply for convenience
 global.__base = __dirname;

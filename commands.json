@@ -111,5 +111,37 @@
     },
     "userPermissions": 100,
     "example": "https://www.youtube.com/watch?v=bl5TUw7sUBs"
+  },
+
+  "party": {
+    "description": "A collection of Party commands.",
+    "alias": [
+      "party",
+      "group"
+    ],
+    "arguments": {
+      "invite": {
+        "description": "Invites a mentioned member.",
+        "optional": false
+      },
+      "kick": {
+        "description": "Kicks a mentioned member from the group.",
+        "optional": false
+      },
+      "join": {
+        "description": "Sends a request to join a user's group, if they have one.",
+        "optional": true
+      },
+      "leave": {
+        "description": "Leaves the current group",
+        "optional": true
+      },
+      "disband": {
+        "description": "Disbands the current group",
+        "optional": true
+      }
+    },
+    "userPermissions": 100,
+    "example": "[ Invite | Kick | [ Join | Leave | Disband ] ] @Medallyon#5012"
   }
 }
