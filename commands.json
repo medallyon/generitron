@@ -143,5 +143,20 @@
     },
     "userPermissions": 100,
     "example": "[ Invite | Kick | [ Join | Leave | Disband ] ] @Medallyon#5012"
+  },
+
+  "google": {
+    "description": "Searches Google for user input.",
+    "alias": [
+      "google"
+    ],
+    "arguments": {
+      "query": {
+        "description": "The thing to search for.",
+        "optional": false
+      }
+    },
+    "userPermissions": 100,
+    "example": "How to build a rocket"
   }
 }
