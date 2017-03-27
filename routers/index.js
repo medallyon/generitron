@@ -1,4 +1,4 @@
-var express = require("express")
+const express = require("express")
 , fs = require("fs-extra")
 , path = require("path");
 
@@ -6,7 +6,7 @@ const WWWROOT = path.join(__base, "wwwroot");
 
 var router = express.Router();
 
-router.get("/*", function(req, res)
+router.get("/", function(req, res)
 {
     // send the main HTML file to the user's browser if they've accessed "/"
     if (req.originalUrl === "\/") return res.sendFile(path.join(WWWROOT, "html", "index", "index.html"));
