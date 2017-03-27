@@ -28,6 +28,7 @@ client["config"] = require(join(__dirname, "config.json"))
 
 // declare a variable indicating the CWD, simply for convenience
 global.__base = __dirname;
+global.__data = join(__dirname, "data");
 
 // function to synchronously import .js modules
 const getModsSync = require("./utils/getModsSync.js");
