@@ -75,7 +75,7 @@
     "example": "[@Medallyon#5012]"
   },
 
-  "fetchWiki": {
+  "wikipedia": {
     "description": "Fetches data about the queried topic directly from Wikipedia.",
     "alias": [
       "wiki",
