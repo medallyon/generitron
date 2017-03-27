@@ -68,7 +68,7 @@ router.get("/logout", function(req, res) {
 function isLoggedIn(req, res, next)
 {
     if (req.isAuthenticated()) next();
-    else res.redirect(`/actuallylogin?continue=${req.originalUrl}`);
+    else res.redirect(`/actuallylogin`);
 }
 
 function resetLocals(req, res, next)

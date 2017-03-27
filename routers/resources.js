@@ -1,4 +1,4 @@
-const path = require("path").join
+const join = require("path").join
 , express = require("express");
 
 var router = express.Router();

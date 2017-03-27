@@ -7,25 +7,25 @@
     <meta name="author" content="">
     <link rel="icon" href="/i/favicon.ico">
 
-    <%- include("partials/head") %>
+    <%- include("partials/dashboard/head") %>
   </head>
 
   <body>
-    <%- include("partials/navBar") %>
+    <%- include("partials/dashboard/navBar") %>
 
     <div class="container-fluid">
       <div class="row">
-        <%- include("partials/navVertical") %>
+        <%- include("partials/dashboard/navVertical") %>
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
           <h1>Dashboard</h1>
 
           <%- if (location === "guilds") { %>
-            <%- include("partials/guilds") %>
+            <%- include("partials/dashboard/guilds") %>
           <% } %>
 
           <%- if (location === "userlist") { %>
-            <%- include("partials/userlist") %>
+            <%- include("partials/dashboard/userlist") %>
           <% } %>
         </main>
       </div>
@@ -40,6 +40,6 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="/i/js/ie10-viewport-bug-workaround.js"></script>
 
-    <%- include("partials/scripts") %>
+    <%- include("partials/dashboard/scripts") %>
   </body>
 </html>
