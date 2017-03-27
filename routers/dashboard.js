@@ -47,14 +47,11 @@ router.get("/callback", passport.authenticate("discord", { failureRedirect: "/" 
 {
     const userDir = join(__data, "users", req.user.id);
 
-    fs.readdir(join(__data, "users"), (err, users) => {
+    fs.outputJson(`${userDir}/user.json`, req.user, (err) => {
         if (err) console.error(err);
 
-        fs.outputJson(`${userDir}/user.json`, req.user, (err) => {
-            if (err) console.error(err);
-
-            res.redirect("/dashboard");
-        });
+        console.log("created " + userDir + "/user.json");
+        res.redirect("/dashboard");
     });
 });
 
@@ -78,54 +75,89 @@ function resetLocals(req, res, next)
         content: "",
         styles: [],
         scripts: [],
-        user: req.user || null
+        user: req.user || null,
+        guilds: []
     };
+    if (req.user)
+    {
+        for (let guild of req.user.guilds) {
+            if (guild.owner || (client.guilds.has(guild.id) && utils.determinePermissions(client.guilds.get(guild.id).members.get(req.user.id)) >= 300))
+            {
+                locals.guilds.push(client.guilds.get(guild.id));
+            }
+        }
+    }
     next();
 }
 
 // ===== [ HTTP ROUTES ] ===== //
 
-router.get("/dashboard", isLoggedIn, function(req, res)
+router.get("/dashboard", resetLocals, isLoggedIn, function(req, res)
 {
     locals.location = "guilds";
-
-    locals.guilds = [];
-    for (let guild of req.user.guilds) {
-        if (guild.owner || utils.determinePermissions(client.guilds.get(guild.id).members.get(req.user.id)) >= 300)
-        {
-            locals.guilds.push(client.guilds.get(guild.id));
-        }
-    }
 
     res.render("pages/dashboard", locals);
 });
 
-router.get("/dashboard/:guild", isLoggedIn, function(req, res)
+router.get("/dashboard/:guild", resetLocals, isLoggedIn, function(req, res)
 {
     fs.readdir(join(__data, "guilds"), (err, guilds) => {
         if (err) console.error(err);
 
-        if (guilds.indexOf(req.params.guild) > -1) locals.guild = client.guilds.get(req.params.guild);
-        else return res.render("pages/error", { title: "404", content: "Applesauce! This guild cannot be found in the intergalactic databank!" });
+        if (guilds.indexOf(req.params.guild) === -1) return res.render("pages/error", Object.assign(locals, { location: "404", title: "404", content: "Applesauce! This guild cannot be found in the intergalactic databank!" }));
+        
+        locals.location = client.guilds.get(req.params.guild).name;
+        locals.guild = client.guilds.get(req.params.guild);
+        locals.members = locals.guild.members.array();
+
+        locals.scripts.push("/i/dashboard/guild/js/guild.js");
 
         res.render("pages/dashboard", locals);
     });
 });
 
-router.get("/dashboard/:guild/users", isLoggedIn, function(req, res)
+router.post("/dashboard/:guild", resetLocals, isLoggedIn, function(req, res)
 {
-    locals.location = "users";
+    let guild = client.guilds.get(req.params.guild);
+    if (utils.determinePermissions(guild.members.get(req.user.id)) < 300) return res.status(401).send("Insufficient Permission.");
 
-    fs.readdir(join(__data, "guilds"), (err, guilds) => {
-        if (err) console.error(err);
+    console.log(req.body);
+    if (req.body.name)
+    {
+        guild.setName(req.body.name).then(() => { res.status(200).end() });
+    }
 
-        if (guilds.indexOf(req.params.guild) > -1) locals.members = client.guilds.get(req.params.guild).members.array();
-        else return res.render("pages/error", { title: "404", content: "Applesauce! This guild cannot be found in the intergalactic databank!" });
+    else if (req.body.membersToKick && req.body.rolesToRemove)
+    {
+        let kicked = 0
+        , removed = 0;
 
-        locals.guild = client.guilds.get(req.params.guild);
+        for (let memberId of req.body.membersToKick) {
+            kicked++;
+            guild.members.get(memberId).kick();
+        }
 
-        res.render("pages/dashboard", locals);
-    });
+        for (let memberId in req.body.rolesToRemove) {
+            removed++;
+            guild.members.get(memberId).removeRoles(req.body.rolesToRemove[memberId]);
+        }
+
+        if (kicked === req.body.membersToKick.length && removed === Object.keys(req.body.rolesToRemove).length) res.status(200).end();
+    }
+
+    else if (req.body.enabled)
+    {
+        utils.readConfig(guild)
+            .then(config => {
+                config.rss.enabled = req.body.enabled;
+                config.rss.feedURL = req.body.feedURL;
+                config.rss.channel = req.body.channel;
+
+                fs.outputJson(join(__data, "guilds", guild.id, "config.json"), config);
+
+                res.redirect(req.originalUrl);
+            }).catch(console.error);
+    }
 });
 
 module.exports = router;
