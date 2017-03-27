@@ -1,0 +1,21 @@
+<h2>Section title</h2>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Avatar</th>
+        <th>Select</th>
+        <th>Username</th>
+        <th>Roles</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (let member in members%><tr>
+        <td><img src="<%- members[member].avatarURL || "https://discordapp.com/assets/dd4dbc0016779df1378e7812eabaa04d.png" %>"></td>
+        <td><input type="checkbox" name="<%- members[member].id %>"></td>
+        <td><%- members[member].user.username %> <% if (members[member].nickname) { %><span class="text-muted">(<%- members[member].nickname %>)</span></td>
+        <td><%- members[member].roles.map(r => r.name).array().join(", ") %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

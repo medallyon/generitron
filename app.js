@@ -76,10 +76,19 @@ app.use(bodyparser.json());
 // allow to POST to the server with extended functionality
 app.use(bodyparser.urlencoded({ extended: true }));
 
+// set the view engine to 'ejs', which allows semi-dynamic website rendering
+app.set("view engine", "ejs");
+// set the views directory
+app.set("views", join(__dirname, "wwwroot", "views"));
+
 // make all resources available
 app.use(require(join(__dirname, "routers", "resources.js")));
+
 // use routers for processing user activity on the webpanel
 app.use(require(join(__dirname, "routers", "index.js")));
+
+// introduce the dashboard router which will handle all activity on /dashboard
+app.use(require(join(__dirname, "routers", "dashboard.js")));
 
 // ================================================================= //
 // ======================= [ Discord Login ] ======================= //

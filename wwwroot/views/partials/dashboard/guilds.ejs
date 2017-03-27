@@ -1,0 +1,8 @@
+<section class="row text-center placeholders">
+  <% for (let i = 0; i < guilds.length; i++) { %><div class="col-6 col-sm-3 placeholder">
+    <img src="<%- guilds[i].iconURL || "https://discordapp.com/assets/dd4dbc0016779df1378e7812eabaa04d.png" %>" width="200" height="200" class="img-fluid rounded-circle" alt="Server Icon || <%- guilds[i].name %>">
+    <h4><%- guilds[i].name %></h4>
+    <div class="text-muted">~<%- guilds[i].memberCount %> members</div>
+  </div>
+  <% } %>
+</section>
