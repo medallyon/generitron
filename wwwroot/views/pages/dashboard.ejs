@@ -7,25 +7,29 @@
     <meta name="author" content="">
     <link rel="icon" href="/i/favicon.ico">
 
-    <%- include("partials/dashboard/head") %>
+    <%- include("../partials/dashboard/head") %>
   </head>
 
   <body>
-    <%- include("partials/dashboard/navBar") %>
+    <%- include("../partials/dashboard/navBar") %>
 
     <div class="container-fluid">
       <div class="row">
-        <%- include("partials/dashboard/navVertical") %>
+        <%- include("../partials/dashboard/navVertical") %>
 
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-          <h1>Dashboard</h1>
+          <h1><%- location.toUpperCase() %></h1>
 
-          <%- if (location === "guilds") { %>
-            <%- include("partials/dashboard/guilds") %>
-          <% } %>
+          <% if (location === "guilds") { %>
+            <%- include("../partials/dashboard/guilds") %>
+          <% } else %>
 
-          <%- if (location === "userlist") { %>
-            <%- include("partials/dashboard/userlist") %>
+          <% if (location === "userlist") { %>
+            <%- include("../partials/dashboard/userlist") %>
+          <% } else %>
+
+          <% if (guilds.some(x => x.name === location)) { %>
+            <%- include("../partials/dashboard/guildboard") %>
           <% } %>
         </main>
       </div>
@@ -40,6 +44,6 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="/i/js/ie10-viewport-bug-workaround.js"></script>
 
-    <%- include("partials/dashboard/scripts") %>
+    <%- include("../partials/dashboard/scripts") %>
   </body>
 </html>

@@ -7,19 +7,20 @@
     <meta name="author" content="">
     <link rel="icon" href="/i/favicon.ico">
 
-    <%- include("partials/dashboard/head") %>
+    <%- include("../partials/dashboard/head") %>
   </head>
 
   <body>
-    <%- include("partials/dashboard/navBar") %>
+    <%- include("../partials/dashboard/navBar") %>
 
     <div class="container-fluid">
       <div class="row">
-        <%- include("partials/dashboard/navVertical") %>
+        <%- include("../partials/dashboard/navVertical") %>
 
-        <main>
-          <h1 class="text-center"><%- title %></h1>
-          <h2 class="text-center"><%- content %></h2>
+        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3 text-center">
+          <h1><%- title %></h1>
+          <h2><%- content %></h2>
+          <p class="lead">Try <a href="/invite">re-inviting</a> <b>Generitron</b> to your server!</p>
         </main>
     </div>
 
@@ -32,6 +33,6 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="/i/js/ie10-viewport-bug-workaround.js"></script>
 
-    <%- include("partials/dashboard/scripts") %>
+    <%- include("../partials/dashboard/scripts") %>
   </body>
 </html>
