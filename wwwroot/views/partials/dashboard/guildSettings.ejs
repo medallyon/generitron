@@ -1,0 +1,10 @@
+<form id="guildSettings" action="/dashboard/<%- guild.id %>" method="POST" enctype="application/json">
+  <div class="form-group">
+    <label for="Server name">Guild Name</label>
+    <input type="text" class="form-control" id="name" aria-describedby="serverName" placeholder="<%- guild.name %>">
+    <small id="serverName" class="form-text text-muted">This will change the name of your guild.</small>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>

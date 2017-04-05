@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/i/favicon.ico">
+
+    <%- include("../partials/dashboard/head") %>
+  </head>
+
+  <body>
+    <%- include("../partials/dashboard/navBar") %>
+
+    <div class="container-fluid">
+      <div class="row">
+        <%- include("../partials/dashboard/navVertical") %>
+
+        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3 text-center">
+          <h1><%- title %></h1>
+          <h2><%- content %></h2>
+          <p class="lead">Try <a href="/invite">re-inviting</a> <b>Generitron</b> to your server!</p>
+        </main>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/i/js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="/i/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/i/js/ie10-viewport-bug-workaround.js"></script>
+
+    <%- include("../partials/dashboard/scripts") %>
+  </body>
+</html>

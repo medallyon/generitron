@@ -1,0 +1,25 @@
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">Settings</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#members" role="tab">Members</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#rss" role="tab">RSS</a>
+  </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="settings" role="tabpanel">
+    <%- include("./guildSettings") %>
+  </div>
+  <div class="tab-pane" id="members" role="tabpanel">
+    <%- include("./userlist") %>
+  </div>
+  <div class="tab-pane" id="rss" role="tabpanel">
+    <%- include("./rssPanel") %>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<form id="memberForm">
+  <div class="form-group">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Kick</th>
+            <th>Avatar</th>
+            <th>Username</th>
+            <th>Roles</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (let m in members) { %><tr id="<%- members[m].id %>">
+            <% let member = members[m]; %>
+
+            <td class="align-middle">
+              <div class="checkbox">
+                <input type="checkbox" id="select-<%- member.id %>" name="select-<%- member.id %>">
+                <label for="select-<%- member.id %>" style="position: absolute;"></label>
+              </div>
+            </td>
+
+            <td class="align-middle"><img class="rounded" width="64" height="64" src="<%- member.user.avatarURL || "https://discordapp.com/assets/dd4dbc0016779df1378e7812eabaa04d.png" %>"></td>
+
+            <td class="align-middle"><%- member.user.username %> <% if (member.nickname) { %><span class="text-muted">(<%- member.nickname %>)</span><% } %> <% if (member.user.bot) { %> <span class="badge badge-primary">BOT</span><% } %> <% if (member.id === guild.owner.id) { %> <span class="badge badge-warning">Owner</span><% } %></td>
+
+            <% let roles = member.roles.filter(r => r.name !== "@everyone").array(); %>
+            <td class="align-middle"><% for (let i = 0; i < roles.length; i++) { %>
+              <span class="badge badge-default" name="<%- member.id %>-<%- roles[i].id %>" style="background-color: <%- roles[i].hexColor %>"><%- roles[i].name %>
+
+                <button type="button" id="removeRole-<%- member.id %>-<%- roles[i].id %>" class="close" style="font-size: .9rem; margin-left: 0.2rem;" aria-label="Remove Role">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+
+              </span>
+            <% } %></td>
+
+          </tr><% } %>
+        </tbody>
+      </table>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
