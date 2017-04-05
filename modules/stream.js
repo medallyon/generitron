@@ -48,7 +48,7 @@ function createCurrentTrackEmbed(track)
         // sets the footer to the appropriate 'brought to you by' message
         .setFooter("Brought to you by Grogsile Industries Inc.", client.user.avatarURL)
         // add an appropriate ISO timestamp
-        .setTimestamp(new Date(track.timestamp).toISOString())
+        .setTimestamp(new Date(track.timestamp))
         // add a field for the view count of the video on YouTube
         .addField("Views", utils.numberWithCommas(track.view_count), true)
         // add a field for the length of the video
@@ -74,7 +74,7 @@ function createQueueEmbed(guildId)
     .setDescription(`The maximum amount of items in the queue is **25**. Type \`${client.config.prefix}play [YouTube URL]\` to add a song to the queue.`)
     // set the appropriate footer
     .setFooter("Brought to you by Grogsile Industries Inc.", "https://i.grogsile.me/img/favicon.png")
-    .setTimestamp(new Date().toISOString());
+    .setTimestamp(new Date());
 
     // Iteration - add fields for all the tracks in the queue
     for (let i = 0; i < thisQueue.length; i++) {
