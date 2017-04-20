@@ -1,13 +1,18 @@
+// the evaluate function
 function evaluate(msg)
 {
+    // use the try keyword
     try {
+        // set a new variable to the evaluated string
         let evaluated = eval(msg.args.join(" "));
-        msg.channel.sendMessage("```js\n" + evaluated + "```");
+        // send this string to the channel of origin
+        msg.channel.sendMessage("```js\n" + evaluated + "```").catch(console.error);
+    // catch any errors during execution
     } catch (err) {
-        msg.channel.sendMessage("```js\n" + err + "```").then((errorMessage) => {
-            msg.author.sendMessage(`Here's your stack ${(msg.guild) ? ("from **" + msg.guild.name + "** *#" + msg.channel.name + "*") : ""}\`\`\`js\n${err.stack}\`\`\``);
-        });
+        // tell the user that an error has occurred
+        msg.channel.sendMessage("```js\n" + err + "```").catch(console.error);
     }
 }
 
+// export the module
 module.exports = evaluate;
