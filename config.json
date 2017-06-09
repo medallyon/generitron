@@ -3,6 +3,10 @@
     "loginToken": "",
     "ownerId": "129036763367735297"
   },
+  "oauth": {
+    "id": "",
+    "secret": ""
+  },
   "google": {
     "api": {
       "keys": {
